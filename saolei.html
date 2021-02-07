@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>saolei</title>
+    <style>
+        #id-div-mime{
+            height: auto;
+            border: 1px solid black;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .row{
+            height: 32px
+        }
+        .cell{
+            vertical-align: middle;
+            display: inline-block;
+            background: #c0c0c0;
+            height: 30px;
+            width: 30px;
+            text-align: center;
+            line-height: 30px;
+            border: 2px outset #ececec;
+            font-size: 0;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+        .open {
+            border: solid #808080;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: default;
+        }
+        .cell:hover {
+            border: solid #808080;
+        }
+        .number1 {
+            color: #0000ff;
+        }
+        .number2 {
+            color: #008100;
+        }
+        .img-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .icon {
+            width: 80%;
+            height: 80%;
+            visibility: hidden;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="id-div-mime"></div>
+    <button id="id-button-restart">重新开始</button>
+    <script src="sweep.js"></script>
+</body>
+</html>
