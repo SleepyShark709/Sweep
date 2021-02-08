@@ -193,7 +193,6 @@ const renderSquare = function(square) {
     let container = document.querySelector('#id-div-mime')
     for (let i = 0; i < square.length; i++) {
         container.insertAdjacentHTML('beforeend', templateRow(square[i], i))
-
     }
 }
 
