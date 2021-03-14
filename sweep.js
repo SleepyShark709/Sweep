@@ -237,6 +237,7 @@ const vjkl = function(cell, square, n) {
         cell.classList.add('open')
         let img = cell.querySelector('.icon')
         img.style.visibility = 'visible'
+        cell.classList.add('boom')
         alert('游戏结束')
         let allCell = document.querySelectorAll('.cell')
         for (let i = 0; i < allCell.length; i++) {
