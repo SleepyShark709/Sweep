@@ -11,7 +11,19 @@
 // let square = JSON.parse(s)
 //
 //
+const log = console.log.bind(console)
 
+const e = (selector) => {
+    let element = document.querySelector(selector)
+    if (element === null) {
+        let s = `选择器 ${selector} 写错了, 请仔细检查并且复习三种基本的选择器`
+        alert(s)
+        //
+        return null
+    } else {
+        return element
+    }
+}
 //生成随机数字
 const random01 = () => {
     let r = Math.random()
@@ -231,23 +243,40 @@ const bindEventDelegate = function(square, n) {
 const vjkl = function(cell, square, n) {
     // 在这里遍历所有的未被打开的 cell (即没有添加 open 类的)
     // 如果没被打开的 cell 里面的 dataset.number 全都是 9，那么代表已经没有可以点的地方了，就可以宣告游戏胜利了
+    let x = cell.dataset.x
+    let y = cell.dataset.y
     if (cell.classList.contains('open')) {
         return false
     } else if (cell.dataset.number === '9') {
-        cell.classList.add('open')
-        let img = cell.querySelector('.icon')
-        img.style.visibility = 'visible'
-        cell.classList.add('boom')
-        alert('游戏结束')
-        let allCell = document.querySelectorAll('.cell')
-        for (let i = 0; i < allCell.length; i++) {
-            let c = allCell[i]
-            if (c.classList.contains('open') === false) {
-                let img = c.querySelector('.icon')
-                if (img) {
-                    img.style.visibility = 'visible'
+        let openCells = document.querySelectorAll('.open')
+        if (openCells.length === 0) {
+            // 第一次点到雷
+            // 增加不会第一次点到雷的功能
+            let container = document.querySelector('#id-div-mime')
+            container.innerHTML = '' // 重置雷盘
+            let n = 10 // 这是 10 * 10 的扫雷方阵
+            const s = square1(n)
+            let _square = markedSquare(s)
+            // square 是一个二维数组
+            renderSquare(_square) // 重新生成雷
+            let _cell = e(`[data-x="${x}"][data-y="${y}"]`) // 重新选中点击的这个元素
+            vjkl(_cell, _square, n)
+        } else {
+            cell.classList.add('open')
+            let img = cell.querySelector('.icon')
+            img.style.visibility = 'visible'
+            cell.classList.add('boom')
+            alert('游戏结束')
+            let allCell = document.querySelectorAll('.cell')
+            for (let i = 0; i < allCell.length; i++) {
+                let c = allCell[i]
+                if (c.classList.contains('open') === false) {
+                    let img = c.querySelector('.icon')
+                    if (img) {
+                        img.style.visibility = 'visible'
+                    }
+                    c.classList.add('open')
                 }
-                c.classList.add('open')
             }
         }
     } else if (cell.dataset.number === '0') {
@@ -295,17 +324,7 @@ const vjklAround = function(square, x, y, n) {
         // 这里展开到 9 是指展开到边界情况
     // 如果碰到的是 0, 展开, 并且递归调用 vjklAround 函数
     // 如果碰到的是其他元素, 展开
-const e = (selector) => {
-    let element = document.querySelector(selector)
-    if (element === null) {
-        let s = `选择器 ${selector} 写错了, 请仔细检查并且复习三种基本的选择器`
-        alert(s)
-        //
-        return null
-    } else {
-        return element
-    }
-}
+
 const vjkl1 = function(square, x, y, n) {
     if (x > -1 && x < n && y > -1 && y < n) {
         let cell = e(`[data-x="${x}"][data-y="${y}"]`)
